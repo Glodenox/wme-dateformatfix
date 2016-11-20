@@ -3,7 +3,7 @@
 // @namespace   http://www.tomputtemans.com/
 // @description Fixes the date format if it is still missing or allows you to override the default date format
 // @include     /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/.*$/
-// @version     0.0.3
+// @version     0.0.4
 // @grant       none
 // ==/UserScript==
 (function() {
@@ -25,11 +25,29 @@
       }
     } catch (e) {
       // see http://www.cplusplus.com/reference/ctime/strftime/ for the supported format specifiers
-      I18n.translations.en.date.formats = {};
-      I18n.translations.en.date.formats.long = "%A %d %b, %H:%M (%z)";
-      I18n.translations.en.time = {};
-      I18n.translations.en.time.formats = {};
-      I18n.translations.en.time.formats.long = "%A %d %b, %H:%M (%z)";
+      addFormat('en', '%a %b %d, %H:%M (%z)');
+      addFormat('nl', '%a %d %b, %H:%M (%z)');
+      addFormat('fr', '%a %d %b, %H:%M (%z)');
+    }
+  }
+  
+  function addFormat(locale, format) {
+    if (I18n.translations[locale]) {
+      if (!I18n.translations[locale].date) {
+        I18n.translations[locale].date = {};
+      }
+      if (!I18n.translations[locale].date.formats) {
+        I18n.translations[locale].date.formats = {};
+      }
+      I18n.translations[locale].date.formats.long = format;
+      
+      if (!I18n.translations[locale].time) {
+        I18n.translations[locale].time = {};
+      }
+      if (!I18n.translations[locale].time.formats) {
+        I18n.translations[locale].time.formats = {};
+      }
+      I18n.translations[locale].time.formats.long = format;
     }
   }
 

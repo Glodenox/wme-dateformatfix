@@ -3,7 +3,7 @@
 // @namespace   http://www.tomputtemans.com/
 // @description Fixes the date format if it is still missing or allows you to override the default date format
 // @include     /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/.*$/
-// @version     0.0.1
+// @version     0.0.2
 // @grant       none
 // ==/UserScript==
 (function() {
@@ -26,10 +26,10 @@
     } catch (e) {
       // see http://www.cplusplus.com/reference/ctime/strftime/ for the supported format specifiers
       I18n.translations.en.date.formats = {};
-      I18n.translations.en.date.formats.long = "%A %d %B, %H:%M (%Z)";
+      I18n.translations.en.date.formats.long = "%A %d %B, %H:%M (%z)";
       I18n.translations.en.time = {};
       I18n.translations.en.time.formats = {};
-      I18n.translations.en.time.formats.long = "%A %d %B, %H:%M (%Z)";
+      I18n.translations.en.time.formats.long = "%A %d %B, %H:%M (%z)";
     }
   }
 

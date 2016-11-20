@@ -3,7 +3,7 @@
 // @namespace   http://www.tomputtemans.com/
 // @description Fixes the date format if it is still missing or allows you to override the default date format
 // @include     /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/.*$/
-// @version     0.0.5
+// @version     0.0.6
 // @grant       none
 // ==/UserScript==
 (function() {
@@ -25,6 +25,7 @@
       }
     } catch (e) {
       // see http://www.cplusplus.com/reference/ctime/strftime/ for the supported format specifiers
+      addFormat(I18n.currentLocale(), '%a %b %d %Y, %H:%M');
       addFormat('en', '%a %b %d %Y, %H:%M');
       addFormat('nl', '%a %d %b %Y, %H:%M');
       addFormat('fr', '%a %d %b %Y, %H:%M');

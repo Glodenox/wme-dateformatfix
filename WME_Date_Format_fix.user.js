@@ -3,7 +3,7 @@
 // @namespace   http://www.tomputtemans.com/
 // @description Fixes the date format if it is still missing or allows you to override the default date format
 // @include     /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/.*$/
-// @version     0.1.1
+// @version     0.1.2
 // @grant       none
 // ==/UserScript==
 (function() {
@@ -32,6 +32,9 @@
       addFormat('fr', '%a %d %b, %Y', '%a %d %b %Y, %H:%M');
       addFormat('cs', '%e. %m., %Y', '%e. %m. %Y, %H.%M');
       addFormat('sk', '%e. %m., %Y', '%e. %m. %Y, %H.%M');
+    }
+    if (I18n.currentLocale() == 'en-GB' && I18n.translations['en-GB'].update_requests.panel.reported == 'Reported on') {
+      I18n.translations['en-GB'].update_requests.panel.reported = 'Reported on: %{date}';
     }
   }
   

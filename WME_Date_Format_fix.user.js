@@ -3,13 +3,13 @@
 // @namespace   http://www.tomputtemans.com/
 // @description Fixes the date format if it is still missing or allows you to override the default date format
 // @include     /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/.*$/
-// @version     0.1
+// @version     0.1.2
 // @grant       none
 // ==/UserScript==
 (function() {
   function init() {
     if (typeof I18n === 'undefined') {
-      log('No internationalisation object found yet, snoozing');
+      console.log('No internationalisation object found yet, snoozing');
       setTimeout(init, 300);
       return;
     }
@@ -30,28 +30,32 @@
       addFormat('en', '%a %b %d, %Y', '%a %b %d %Y, %H:%M');
       addFormat('nl', '%a %d %b, %Y', '%a %d %b %Y, %H:%M');
       addFormat('fr', '%a %d %b, %Y', '%a %d %b %Y, %H:%M');
+      addFormat('cs', '%e. %m., %Y', '%e. %m. %Y, %H.%M');
+      addFormat('sk', '%e. %m., %Y', '%e. %m. %Y, %H.%M');
     }
   }
   
   function addFormat(locale, dateFormat, datetimeFormat) {
-    if (I18n.translations[locale]) {
-      if (!I18n.translations[locale].date) {
-        I18n.translations[locale].date = {};
-      }
-      if (!I18n.translations[locale].date.formats) {
-        I18n.translations[locale].date.formats = {};
-      }
-      I18n.translations[locale].date.formats.long = datetimeFormat;
-      I18n.translations[locale].date.formats.default = dateFormat;
-      
-      if (!I18n.translations[locale].time) {
-        I18n.translations[locale].time = {};
-      }
-      if (!I18n.translations[locale].time.formats) {
-        I18n.translations[locale].time.formats = {};
-      }
-      I18n.translations[locale].time.formats.long = datetimeFormat;
+    if (!I18n.translations[locale]) {
+      return;
     }
+
+    if (!I18n.translations[locale].date) {
+      I18n.translations[locale].date = {};
+    }
+    if (!I18n.translations[locale].date.formats) {
+      I18n.translations[locale].date.formats = {};
+    }
+    I18n.translations[locale].date.formats.long = datetimeFormat;
+    I18n.translations[locale].date.formats.default = dateFormat;
+
+    if (!I18n.translations[locale].time) {
+      I18n.translations[locale].time = {};
+    }
+    if (!I18n.translations[locale].time.formats) {
+      I18n.translations[locale].time.formats = {};
+    }
+    I18n.translations[locale].time.formats.long = datetimeFormat;
   }
 
   init();

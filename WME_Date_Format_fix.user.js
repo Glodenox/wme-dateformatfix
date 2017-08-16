@@ -2,8 +2,8 @@
 // @name        WME Date Format Fix
 // @namespace   http://www.tomputtemans.com/
 // @description Fixes the date format if it is still missing or allows you to override the default date format
-// @include     /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor\/.*$/
-// @version     0.1.2
+// @include     /^https:\/\/(www|beta)\.waze\.com\/(?!user\/)(.{2,6}\/)?editor.*$/
+// @version     0.1.3
 // @grant       none
 // ==/UserScript==
 (function() {
